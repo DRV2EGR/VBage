@@ -8,6 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import ru.vbage.dto.UserDto;
 import ru.vbage.entity.User;
+import ru.vbage.exception.BadRequestException;
 import ru.vbage.exception.UserNotFoundExeption;
 import ru.vbage.payload.SendMessagePayload;
 import ru.vbage.payload.UserDtoPayload;
@@ -28,12 +29,17 @@ public class UserPrivateController {
 
     private User getAuthentificatedUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String currentUserName = authentication.getName();
-        User currentUser = userService.findByUsername(currentUserName).orElseThrow(
-                () -> {throw new UserNotFoundExeption("");}
-        );
+        try {
+            String currentUserName = authentication.getName();
+            User currentUser = userService.findByUsername(currentUserName).orElseThrow(
+                    () -> {throw new UserNotFoundExeption("");}
+            );
 
-        return currentUser;
+            return currentUser;
+        } catch (Exception e) {
+            throw new BadRequestException("No user in auth");
+        }
+
     }
 
     /**
@@ -86,5 +92,8 @@ public class UserPrivateController {
         return ResponseEntity.ok("OK");
     }
 
-    
+    @GetMapping("/all_friends")
+    public ResponseEntity<?> getAllFriends() {
+        return ResponseEntity.ok(userService.getAllFriends(getAuthentificatedUser()));
+    }
 }

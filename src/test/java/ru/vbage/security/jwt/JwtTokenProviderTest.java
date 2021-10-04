@@ -1,4 +1,4 @@
-package ru.vbage.jwt;
+package ru.vbage.security.jwt;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

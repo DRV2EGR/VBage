@@ -1,4 +1,4 @@
-package ru.vbage.jwt;
+package ru.vbage.security.jwt;
 
 import java.io.IOException;
 

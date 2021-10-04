@@ -1,4 +1,4 @@
-package ru.vbage.jwt;
+package ru.vbage.security.jwt;
 
 import java.util.Base64;
 import java.util.Date;

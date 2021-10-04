@@ -1,4 +1,4 @@
-package ru.vbage.jwt;
+package ru.vbage.security.jwt;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

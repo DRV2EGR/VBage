@@ -2,6 +2,9 @@ package ru.vbage.entity;
 
 import org.junit.jupiter.api.Test;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+
 class RoleTest {
     @Test
     void testCanEqual() {

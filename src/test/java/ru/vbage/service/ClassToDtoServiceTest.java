@@ -13,6 +13,11 @@ import ru.vbage.dto.UserPublicDto;
 import ru.vbage.entity.Message;
 import ru.vbage.entity.Role;
 import ru.vbage.entity.User;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.*;
+import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 @SpringBootTest
 @ExtendWith(SpringExtension.class)

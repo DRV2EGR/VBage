@@ -3,6 +3,8 @@ package ru.vbage.exception;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 class NotFoundExceptionTest {
     @Test

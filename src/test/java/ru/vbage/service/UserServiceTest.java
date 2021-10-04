@@ -521,6 +521,7 @@ class UserServiceTest {
 
         Role role1 = new Role();
         User user1 = new User();
+        user1.setId(123L);
 
         Role role2 = new Role();
         User user2 = new User();

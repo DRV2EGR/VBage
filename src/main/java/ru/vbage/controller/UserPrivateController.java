@@ -85,4 +85,6 @@ public class UserPrivateController {
         userService.deleteFriend(getAuthentificatedUser().getId(), friend_id);
         return ResponseEntity.ok("OK");
     }
+
+    
 }

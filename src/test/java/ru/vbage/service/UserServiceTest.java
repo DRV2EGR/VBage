@@ -609,5 +609,47 @@ class UserServiceTest {
         assertThrows(UserNotFoundExeption.class, () -> this.userService.deleteFriend(1L, 1L));
         verify(this.userRepository).findById((Long) any());
     }
+
+    @Test
+    void testRegisterNewUser() {
+        Role role = new Role();
+        role.setId(123L);
+        role.setName("Name");
+
+        User user = new User();
+        user.setLastName("Doe");
+        user.setEmail("jane.doe@example.org");
+        user.setPassword("iloveyou");
+        user.setRole(role);
+        user.setActivationCode("Activation Code");
+        user.setCreatedActivationCode(LocalDateTime.of(1, 1, 1, 1, 1));
+        user.setId(123L);
+        user.setFriends(new ArrayList<User>());
+        user.setPhoneNumber("4105551212");
+        user.setTimeOfAccountCreation(LocalDateTime.of(1, 1, 1, 1, 1));
+        user.setUserProfileImageUrl("https://example.org/example");
+        user.setFirstName("Jane");
+        user.setUsername("janedoe");
+        user.setSecondName("Second Name");
+        when(this.userRepository.save((User) any())).thenReturn(user);
+
+        Role role1 = new Role();
+        role1.setId(123L);
+        role1.setName("Name");
+        Optional<Role> ofResult = Optional.<Role>of(role1);
+        when(this.roleRepository.findById((Long) any())).thenReturn(ofResult);
+        UserDto actualRegisterNewUserResult = this.userService.registerNewUser(new UserDtoPayload("Jane", "Second Name",
+                "Doe", "janedoe", "jane.doe@example.org", "iloveyou", "4105551212", "https://example.org/example"));
+        assertEquals("jane.doe@example.org", actualRegisterNewUserResult.getEmail());
+        assertEquals("janedoe", actualRegisterNewUserResult.getUsername());
+        assertEquals("Second Name", actualRegisterNewUserResult.getSecondName());
+        assertEquals("Name", actualRegisterNewUserResult.getRole());
+        assertEquals("4105551212", actualRegisterNewUserResult.getPhoneNumber());
+        assertEquals("Doe", actualRegisterNewUserResult.getLastName());
+        assertEquals(0L, actualRegisterNewUserResult.getId());
+        assertEquals("Jane", actualRegisterNewUserResult.getFirstName());
+        verify(this.userRepository).save((User) any());
+        verify(this.roleRepository).findById((Long) any());
+    }
 }
 

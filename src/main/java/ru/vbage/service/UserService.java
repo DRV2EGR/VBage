@@ -264,4 +264,13 @@ public class UserService {
         userRepository.save(user);
     }
 
+    public UserDto registerNewUser(UserDtoPayload userDtoPayload) {
+        User user = createNewUserAndFillBasicFields(userDtoPayload);
+        user.setRole(roleRepository.findById(1L).get());
+
+        user.setFriends(new ArrayList<>());
+        userRepository.save(user);
+        return convertUserToUserDto(user);
+    }
+
 }
